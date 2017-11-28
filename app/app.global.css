@@ -1,0 +1,14 @@
+@import '~font-awesome/css/font-awesome.css';
+@import '~@blueprintjs/core/dist/blueprint.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #293742;
+}
+
+#root {
+  height: 100%;
+}

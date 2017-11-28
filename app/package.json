@@ -1,0 +1,55 @@
+{
+  "name": "electron-react-boilerplate",
+  "productName": "electron-react-boilerplate",
+  "version": "1.0.0",
+  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "C. T. Lin",
+    "email": "chentsulin@gmail.com",
+    "url": "https://github.com/chentsulin"
+  },
+  "scripts": {
+    "postinstall": "npm rebuild --runtime=electron --target=1.6.6 --disturl=https://atom.io/download/atom-shell --build-from-source"
+  },
+  "moduleRoots": [
+    "."
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "highcharts-boost": "^0.1.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint-config-xo-react": "^0.14.0",
+    "eslint-plugin-react": "^7.5.1",
+    "prettier": "^1.8.2",
+    "xo": "^0.18.2"
+  },
+  "xo": {
+    "space": true,
+    "semicolon": false,
+    "parser": "babel-eslint",
+    "extends": "xo-react/space",
+    "envs": [
+      "browser"
+    ],
+    "rules": {
+      "comma-dangle": [
+        "error",
+        "always-multiline"
+      ],
+      "import/no-unresolved": "off",
+      "import/no-extraneous-dependencies": "off",
+      "import/newline-after-import": "off",
+      "import/order": "off",
+      "unicorn/filename-case": "off",
+      "react/jsx-no-bind": "off",
+      "react/forbid-component-props": "off",
+      "react/jsx-tag-spacing": "off",
+      "react/prop-types": "off",
+      "space-before-function-paren": "off",
+      "no-mixed-operators": "off"
+    }
+  }
+}
