@@ -20,30 +20,41 @@ const mapDispatchToProps = {
   onUpdate: updateSettings,
 }
 
-const SettingsPopover = ({settings, onUpdate}) => (
-  <Container>
-    <FormGroup label="Columns">
-      <input
-        type="number"
-        className="pt-input pt-fill"
-        value={settings.columns}
-        onChange={({target: {value}}) => onUpdate('columns', value)}
-      />
-    </FormGroup>
-    <FormGroup label="FFT Resolution">
-      <input
-        className="pt-input pt-fill"
-        defaultValue={settings.fftResolution}
-        onBlur={({target: {value}}) => {
-          if (!value || !Number(value) || value < 0) {
-            return
-          }
-          onUpdate('fftResolution', np2(Number(value)))
-        }}
-      />
-    </FormGroup>
-  </Container>
-)
+const SettingsPopover = ({settings, onUpdate}) => {
+  const changeResolution = value => {
+    if (!value || !Number(value) || value < 0) {
+      return
+    }
+    onUpdate('fftResolution', np2(Number(value)))
+  }
+  return (
+    <Container>
+      <FormGroup label="Columns">
+        <input
+          type="number"
+          className="pt-input pt-fill"
+          value={settings.columns}
+          onChange={({target: {value}}) => onUpdate('columns', value)}
+        />
+      </FormGroup>
+      {/* `key` used for rerendering `input` and pass new calculated `fftResolution` */}
+      <FormGroup key={settings.fftResolution} label="FFT Resolution">
+        <input
+          className="pt-input pt-fill"
+          defaultValue={settings.fftResolution}
+          onBlur={({target: {value}}) => {
+            changeResolution(value)
+          }}
+          onKeyPress={({key, target: {value}}) => {
+            if (key === 'Enter') {
+              changeResolution(value)
+            }
+          }}
+        />
+      </FormGroup>
+    </Container>
+  )
+}
 
 export default connect(
   mapStateToProps,

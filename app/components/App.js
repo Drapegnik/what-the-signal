@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import {Flex} from 'grid-styled'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
 import {NonIdealState, Button} from '@blueprintjs/core'
 
-import Group from 'components/Group'
 import Header from 'components/Header'
 import CombinedChart from 'components/CombinedChart'
 import DataChart from 'components/DataChart'
@@ -64,7 +63,7 @@ const App = ({chartIDs, mode, columns, onOpenFile}) => (
       </Grid>
     )}
     {chartIDs.length !== 0 && mode === 'fft' && (
-      <Group>
+      <Fragment>
         <Grid columns={columns}>
           {chartIDs.map(id => (
             <DataChart key={id} id={id} />
@@ -73,10 +72,10 @@ const App = ({chartIDs, mode, columns, onOpenFile}) => (
             <FFTChart key={id} id={id} />
           ))}
         </Grid>
-      </Group>
+      </Fragment>
     )}
     {chartIDs.length !== 0 && mode === 'full-fft' && (
-      <Group>
+      <Fragment>
         <Grid columns={columns}>
           {chartIDs.map(id => (
             <DataChart key={id} id={id} />
@@ -85,7 +84,7 @@ const App = ({chartIDs, mode, columns, onOpenFile}) => (
             <FullFFTChart key={id} id={id} />
           ))}
         </Grid>
-      </Group>
+      </Fragment>
     )}
     {chartIDs.length !== 0 && mode === 'combine' && <CombinedChart />}
   </FullHeightFlex>
