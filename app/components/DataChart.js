@@ -1,12 +1,13 @@
-import React from 'react'
 import {basename} from 'path'
+
+import React from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
 
-import {updateSettings} from 'actions'
-import {makeChartDataGetter} from 'selectors'
-
 import Chart from 'components/Chart'
+
+import {updateSettings} from 'store/actions'
+import {makeChartDataGetter} from 'store/selectors'
 
 const Container = styled.div`
   display: flex;
@@ -77,15 +78,7 @@ const mapDispatchToProps = {
   onUpdateSettings: updateSettings,
 }
 
-const DataChart = ({
-  id,
-  data,
-  zoom,
-  fftResolution,
-  fftFrom,
-  mode,
-  onUpdateSettings,
-}) => (
+const DataChart = ({id, data, zoom, fftResolution, fftFrom, mode, onUpdateSettings}) => (
   <Container>
     <StatList>
       {StatsDefs.map(s => (
@@ -122,7 +115,7 @@ const DataChart = ({
           backgroundColor: 'none',
           pointFormat: 'Value: {point.y}',
           formatter() {
-            const time = data.lengthSeconds / data.samples.length * this.x
+            const time = (data.lengthSeconds / data.samples.length) * this.x
             return `[${time.toFixed(3)}s]: ${this.y.toFixed(3)}`
           },
           headerFormat: '',
@@ -165,4 +158,7 @@ const DataChart = ({
   </Container>
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(DataChart)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DataChart)

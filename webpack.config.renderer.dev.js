@@ -7,31 +7,33 @@
  * https://webpack.js.org/concepts/hot-module-replacement/
  */
 
-import path from 'path';
-import fs from 'fs';
-import webpack from 'webpack';
-import chalk from 'chalk';
-import merge from 'webpack-merge';
-import { spawn, execSync } from 'child_process';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import baseConfig from './webpack.config.base';
-import CheckNodeEnv from './internals/scripts/CheckNodeEnv';
+import path from 'path'
+import fs from 'fs'
+import webpack from 'webpack'
+import chalk from 'chalk'
+import merge from 'webpack-merge'
+import {spawn, execSync} from 'child_process'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+import baseConfig from './webpack.config.base'
+import CheckNodeEnv from './internals/scripts/CheckNodeEnv'
 
-CheckNodeEnv('development');
+CheckNodeEnv('development')
 
-const port = process.env.PORT || 1212;
-const publicPath = `http://localhost:${port}/dist`;
-const dll = path.resolve(process.cwd(), 'dll');
-const manifest = path.resolve(dll, 'renderer.json');
+const port = process.env.PORT || 1212
+const publicPath = `http://localhost:${port}/dist`
+const dll = path.resolve(process.cwd(), 'dll')
+const manifest = path.resolve(dll, 'renderer.json')
 
 /**
  * Warn if the DLL is not built
  */
 if (!(fs.existsSync(dll) && fs.existsSync(manifest))) {
-  console.log(chalk.black.bgYellow.bold(
-    'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"'
-  ));
-  execSync('npm run build-dll');
+  console.log(
+    chalk.black.bgYellow.bold(
+      'The DLL files are missing. Sit back while we build them for you with "npm run build-dll"',
+    ),
+  )
+  execSync('npm run build-dll')
 }
 
 export default merge.smart(baseConfig, {
@@ -253,7 +255,7 @@ export default merge.smart(baseConfig, {
     inline: true,
     lazy: false,
     hot: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
+    headers: {'Access-Control-Allow-Origin': '*'},
     contentBase: path.join(__dirname, 'dist'),
     watchOptions: {
       aggregateTimeout: 300,
@@ -266,15 +268,11 @@ export default merge.smart(baseConfig, {
     },
     before() {
       if (process.env.START_HOT) {
-        console.log('Staring Main Process...');
-        spawn(
-          'npm',
-          ['run', 'start-main-dev'],
-          { shell: true, env: process.env, stdio: 'inherit' }
-        )
-        .on('close', code => process.exit(code))
-        .on('error', spawnError => console.error(spawnError));
+        console.log('Staring Main Process...')
+        spawn('npm', ['run', 'start-main-dev'], {shell: true, env: process.env, stdio: 'inherit'})
+          .on('close', code => process.exit(code))
+          .on('error', spawnError => console.error(spawnError))
       }
     },
   },
-});
+})

@@ -1,18 +1,11 @@
 import React from 'react'
-import styled from 'styled-components'
 import {Box} from 'grid-styled'
 import {connect} from 'react-redux'
-import {
-  Button,
-  Menu,
-  MenuItem,
-  MenuDivider,
-  Popover,
-  Position,
-} from '@blueprintjs/core'
+import {Button, Menu, MenuItem, MenuDivider, Popover, Position} from '@blueprintjs/core'
 
 import SettingsPopover from 'components/SettingsPopover'
-import {selectAndOpenFile, closeFile, updateSettings, exit} from 'actions'
+
+import {selectAndOpenFile, closeFile, updateSettings, exit} from 'store/actions'
 
 const mapDispatchToProps = {
   onOpenFile: selectAndOpenFile,
@@ -36,11 +29,7 @@ const Header = ({onOpenFile, onCloseFile, onUpdateSettings, onExit}) => (
             </Menu>
           }
           target={
-            <Button
-              className="pt-minimal"
-              iconName="document"
-              rightIconName="caret-down"
-            >
+            <Button className="pt-minimal" iconName="document" rightIconName="caret-down">
               File
             </Button>
           }
@@ -81,11 +70,7 @@ const Header = ({onOpenFile, onCloseFile, onUpdateSettings, onExit}) => (
             </Menu>
           }
           target={
-            <Button
-              className="pt-minimal"
-              iconName="style"
-              rightIconName="caret-down"
-            >
+            <Button className="pt-minimal" iconName="style" rightIconName="caret-down">
               View
             </Button>
           }
@@ -102,4 +87,7 @@ const Header = ({onOpenFile, onCloseFile, onUpdateSettings, onExit}) => (
   </div>
 )
 
-export default connect(null, mapDispatchToProps)(Header)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Header)

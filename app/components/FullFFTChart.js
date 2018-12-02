@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import {NonIdealState} from '@blueprintjs/core'
 
 import Chart from 'components/Chart'
-import {makeFullFFTDataGetter} from 'selectors'
+
+import {makeFullFFTDataGetter} from 'store/selectors'
 
 const Container = styled.div`
   display: flex;
@@ -32,9 +33,7 @@ const FullFFTChart = ({id, data, fftResolution}) => {
       <NonIdealState
         visual="warning-sign"
         title="Too little data"
-        description={`Sample count is less then fft resolution (${
-          fftResolution
-        })`}
+        description={`Sample count is less then fft resolution (${fftResolution})`}
       />
     )
   }
@@ -52,12 +51,7 @@ const FullFFTChart = ({id, data, fftResolution}) => {
             max: fftResolution / 2,
           },
           colorAxis: {
-            stops: [
-              [0, '#3060cf'],
-              [0.5, '#fffbbc'],
-              [0.9, '#c4463a'],
-              [1, '#c4463a'],
-            ],
+            stops: [[0, '#3060cf'], [0.5, '#fffbbc'], [0.9, '#c4463a'], [1, '#c4463a']],
           },
           tooltip: {
             enabled: true,
@@ -74,9 +68,8 @@ const FullFFTChart = ({id, data, fftResolution}) => {
             backgroundColor: 'none',
             formatter() {
               const {point} = this
-              const freq = this.y * data.chunkFreq / fftResolution * 2
-              const time = data.lengthSeconds / data.samples.length * point.x
-              // prettier-ignore
+              const freq = ((this.y * data.chunkFreq) / fftResolution) * 2
+              const time = (data.lengthSeconds / data.samples.length) * point.x
               return `[${time.toFixed(3)}s] [${freq.toFixed(0)}Hz]: ${point.value.toFixed(3)}`
             },
           },

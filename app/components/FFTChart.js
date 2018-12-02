@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import {NonIdealState} from '@blueprintjs/core'
 
 import Chart from 'components/Chart'
-import {makeFFTDataGetter} from 'selectors'
+
+import {makeFFTDataGetter} from 'store/selectors'
 
 const Container = styled.div`
   display: flex;
@@ -59,7 +60,7 @@ const FFTChart = ({id, data, fftResolution}) => {
             borderWidth: 0,
             backgroundColor: 'none',
             formatter() {
-              const freq = this.x * data.chunkFreq / fftResolution * 2
+              const freq = ((this.x * data.chunkFreq) / fftResolution) * 2
               return `[${freq.toFixed(0)}Hz]: ${this.y.toFixed(3)}`
             },
           },

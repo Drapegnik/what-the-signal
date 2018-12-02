@@ -55,7 +55,7 @@ export const makeFFTDataGetter = () =>
       const fft = new FFT(fftResolution, data.chunkFreq)
       fft.forward(selectedSamples)
       return {
-        spectrum: Array.from(fft.spectrum),
+        spectrum: [...fft.spectrum],
         ...data,
       }
     },
@@ -70,11 +70,7 @@ export const makeFullFFTDataGetter = () =>
         return
       }
       const spectrum = []
-      for (
-        let i = 0;
-        i < data.samples.length - fftResolution;
-        i += fftResolution / 2
-      ) {
+      for (let i = 0; i < data.samples.length - fftResolution; i += fftResolution / 2) {
         const samples = data.samples.slice(i, i + fftResolution)
         const fft = new FFT(fftResolution, data.chunkFreq)
         fft.forward(hann(samples))

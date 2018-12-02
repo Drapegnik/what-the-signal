@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {connect} from 'react-redux'
 import {FormGroup} from '@blueprintjs/core'
 
-import {updateSettings} from 'actions'
+import {updateSettings} from 'store/actions'
 
 const Container = styled.div`
   padding: 32px;
@@ -45,4 +45,7 @@ const SettingsPopover = ({settings, onUpdate}) => (
   </Container>
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPopover)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SettingsPopover)

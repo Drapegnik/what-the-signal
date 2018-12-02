@@ -1,36 +1,62 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
+  "name": "what-the-signal",
+  "productName": "Vibro Signal Processing",
   "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "description": "Small DSP university project, FCSN, BSUIR",
   "main": "./main.prod.js",
-  "author": {
-    "name": "C. T. Lin",
-    "email": "chentsulin@gmail.com",
-    "url": "https://github.com/chentsulin"
-  },
+  "author": "Dmitry Kabak <userdima@gmail.com> (https://github.com/kabbi)",
+  "contributors": [
+    "Ivan Pazthitnykh <ivan.pazhitnykh@gmail.com> (https://github.com/Drapegnik)"
+  ],
   "scripts": {
-    "postinstall": "npm rebuild --runtime=electron --target=1.6.6 --disturl=https://atom.io/download/atom-shell --build-from-source"
+    "postinstall": "npm rebuild --runtime=electron --target=1.6.6 --disturl=https://atom.io/download/atom-shell --build-from-source",
+    "prettier": "prettier --config .prettierrc --write",
+    "prettify": "npm run prettier '**/*.js'",
+    "xo": "xo"
+  },
+  "dependencies": {
+    "@blueprintjs/core": "^1.33.0",
+    "dsp.js": "^1.0.1",
+    "fft-js": "^0.0.11",
+    "fft-windowing": "^0.1.4",
+    "font-awesome": "^4.7.0",
+    "grid-styled": "^2.0.0-11",
+    "highcharts-boost": "^0.1.2",
+    "jdataview": "^2.5.0",
+    "lodash": "^4.17.4",
+    "mathjs": "^3.17.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-highcharts": "^15.0.0",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "styled-components": "^2.2.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "eslint-config-xo-react": "^0.17.0",
+    "eslint-plugin-react": "^7.11.1",
+    "prettier": "^1.15.3",
+    "xo": "^0.23.0"
   },
   "moduleRoots": [
     "."
   ],
   "license": "MIT",
-  "dependencies": {
-    "highcharts-boost": "^0.1.2"
-  },
-  "devDependencies": {
-    "babel-eslint": "^8.0.2",
-    "eslint-config-xo-react": "^0.14.0",
-    "eslint-plugin-react": "^7.5.1",
-    "prettier": "^1.8.2",
-    "xo": "^0.18.2"
-  },
   "xo": {
     "space": true,
     "semicolon": false,
+    "prettier": true,
     "parser": "babel-eslint",
     "extends": "xo-react/space",
+    "ignores": [
+      "node_modules",
+      "dist",
+      "main.prod.js"
+    ],
     "envs": [
       "browser"
     ],
@@ -39,17 +65,24 @@
         "error",
         "always-multiline"
       ],
-      "import/no-unresolved": "off",
       "import/no-extraneous-dependencies": "off",
-      "import/newline-after-import": "off",
-      "import/order": "off",
+      "import/no-unresolved": "off",
       "unicorn/filename-case": "off",
-      "react/jsx-no-bind": "off",
-      "react/forbid-component-props": "off",
-      "react/jsx-tag-spacing": "off",
       "react/prop-types": "off",
-      "space-before-function-paren": "off",
-      "no-mixed-operators": "off"
+      "react/no-this-in-sfc": "off",
+      "import/no-unassigned-import": [
+        "error",
+        {
+          "allow": [
+            "**/*.css"
+          ]
+        }
+      ]
+    },
+    "settings": {
+      "react": {
+        "version": "16.1.1"
+      }
     }
   }
 }

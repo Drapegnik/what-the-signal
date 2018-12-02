@@ -3,8 +3,9 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 import Chart from 'components/Chart'
-import {updateSettings} from 'actions'
-import {getCombinedData} from 'selectors'
+
+import {updateSettings} from 'store/actions'
+import {getCombinedData} from 'store/selectors'
 
 const Container = styled.div`
   height: 100px;
@@ -19,6 +20,7 @@ const mapDispatchToProps = {
   onUpdateSettings: updateSettings,
 }
 
+// UNUSED:
 const SelectionChart = ({data, zoom, onUpdateSettings}) => (
   <Chart
     config={{
@@ -64,4 +66,7 @@ const SelectionChart = ({data, zoom, onUpdateSettings}) => (
   />
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectionChart)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SelectionChart)

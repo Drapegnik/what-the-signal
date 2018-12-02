@@ -8,10 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   sourceMapSupport.install()
 }
 
-if (
-  process.env.NODE_ENV === 'development' ||
-  process.env.DEBUG_PROD === 'true'
-) {
+if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
   require('electron-debug')()
   const path = require('path')
   const p = path.join(__dirname, '..', 'app', 'node_modules')
@@ -20,7 +17,7 @@ if (
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer')
-  const forceDownload = !!process.env.UPGRADE_EXTENSIONS
+  const forceDownload = Boolean(process.env.UPGRADE_EXTENSIONS)
   const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS']
 
   return Promise.all(
@@ -29,10 +26,7 @@ const installExtensions = async () => {
 }
 
 const openWindow = async () => {
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.DEBUG_PROD === 'true'
-  ) {
+  if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions()
   }
 
@@ -73,7 +67,7 @@ app.on('ready', async () => {
 })
 
 app.on('activate', async () => {
-  if (mainWindow != null) {
+  if (mainWindow !== null) {
     return
   }
   await openWindow()

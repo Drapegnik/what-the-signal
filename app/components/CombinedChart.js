@@ -1,10 +1,12 @@
-import React from 'react'
 import {basename} from 'path'
+
+import React from 'react'
 import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 import Chart from 'components/Chart'
-import {getCombinedData} from 'selectors'
+
+import {getCombinedData} from 'store/selectors'
 
 const Fill = styled.div`
   flex: 1 1 auto;
@@ -30,13 +32,11 @@ const CombinedChart = ({data}) => (
           return this.points
             .map((point, index) => {
               const {fileName, samples, lengthSeconds} = data[index]
-              const time = lengthSeconds / samples.length * point.x
+              const time = (lengthSeconds / samples.length) * point.x
               // What a mess, prettier
-              return `<span style="color:${
-                point.point.color
-              }">\u25CF</span> ${basename(fileName)}: <b>${time.toFixed(
-                3,
-              )}s</b>, <b>${point.y}</b><br/>`
+              return `<span style="color:${point.point.color}">\u25CF</span> ${basename(
+                fileName,
+              )}: <b>${time.toFixed(3)}s</b>, <b>${point.y}</b><br/>`
             })
             .join('')
         },

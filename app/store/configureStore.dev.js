@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from '../reducers'
+
+import rootReducer from './reducers'
 
 export default initialState => {
   // Redux Configuration
@@ -22,9 +23,7 @@ export default initialState => {
   const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
-    module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')),
-    )
+    module.hot.accept('./reducers', () => store.replaceReducer(require('./reducers')))
   }
 
   return store

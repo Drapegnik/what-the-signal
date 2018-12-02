@@ -7,6 +7,7 @@ import addBoost from 'highcharts/modules/boost'
 import addHeatmap from 'highcharts/modules/heatmap'
 
 import theme from 'utils/chart-theme'
+
 Highcharts.setOptions(theme)
 addHeatmap(Highcharts)
 addBoost(Highcharts)
@@ -38,13 +39,6 @@ class Chart extends Component {
     } else {
       this.chart = new Highcharts.Chart(this.container, this.getConfig())
     }
-
-    // requestAnimationFrame(() => {
-    //   if (!this.chart) {
-    //     return
-    //   }
-    //   this.chart.redraw()
-    // })
   }
 
   getConfig() {
