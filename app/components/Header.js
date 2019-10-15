@@ -5,16 +5,17 @@ import {Button, Menu, MenuItem, MenuDivider, Popover, Position} from '@blueprint
 
 import SettingsPopover from 'components/SettingsPopover'
 
-import {selectAndOpenFile, closeFile, updateSettings, exit} from 'store/actions'
+import {selectAndOpenFile, takeScreenShot, closeFile, updateSettings, exit} from 'store/actions'
 
 const mapDispatchToProps = {
   onOpenFile: selectAndOpenFile,
+  onSave: takeScreenShot,
   onCloseFile: closeFile,
   onUpdateSettings: updateSettings,
   onExit: exit,
 }
 
-const Header = ({onOpenFile, onCloseFile, onUpdateSettings, onExit}) => (
+const Header = ({onOpenFile, onSave, onCloseFile, onUpdateSettings, onExit}) => (
   <div className="pt-navbar">
     <Box px={2}>
       <div className="pt-navbar-group pt-align-left">
@@ -23,6 +24,7 @@ const Header = ({onOpenFile, onCloseFile, onUpdateSettings, onExit}) => (
           content={
             <Menu>
               <MenuItem text="Add" label="⌘O" onClick={onOpenFile} />
+              <MenuItem text="Save" label="⌘S" onClick={onSave} />
               <MenuItem text="Close" label="⌘E" onClick={onCloseFile} />
               <MenuDivider />
               <MenuItem text="Exit" label="⌘Q" onClick={onExit} />
