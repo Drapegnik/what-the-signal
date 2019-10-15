@@ -2,6 +2,8 @@ import {createSelector} from 'reselect'
 import {hann} from 'fft-windowing'
 import {FFT} from 'dsp.js'
 import math from 'mathjs'
+import loMin from 'lodash/min'
+import loMax from 'lodash/max'
 
 export const getChartIDs = createSelector(
   state => state.files,
@@ -58,6 +60,42 @@ export const makeFFTDataGetter = () =>
         spectrum: [...fft.spectrum],
         ...data,
       }
+    },
+  )
+
+export const makeHistogramDataGetter = () =>
+  createSelector(
+    (state, id) => state.files[id],
+    state => state.settings.fftResolution,
+    state => state.settings.fftFrom,
+    (data, fftResolution, fftFrom) => {
+      const fftTo = fftFrom + fftResolution
+      if (fftFrom < 0 || fftTo >= data.samples.length) {
+        return data
+      }
+      const selectedSamples = data.samples.slice(fftFrom, fftTo)
+      const min = loMin(selectedSamples)
+      const max = loMax(selectedSamples)
+
+      const categories = []
+      const result = []
+
+      const STEP = 5
+      for (let tmp = min; tmp < max + (max - min) / (STEP + 1); tmp += (max - min) / STEP) {
+        categories.push(tmp.toFixed(4))
+        result.push(0)
+      }
+
+      for (let i = 0; i < selectedSamples.length; i++) {
+        for (let j = 0; j < categories.length; j++) {
+          if (selectedSamples[i] <= categories[j]) {
+            result[j]++
+            break
+          }
+        }
+      }
+
+      return {histogram: result, categories, ...data}
     },
   )
 

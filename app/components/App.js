@@ -9,6 +9,7 @@ import CombinedChart from 'components/CombinedChart'
 import DataChart from 'components/DataChart'
 import FFTChart from 'components/FFTChart'
 import FullFFTChart from 'components/FullFFTChart'
+import HistogramChart from 'components/HistogramChart'
 
 import {selectAndOpenFile} from 'store/actions'
 import {getChartIDs} from 'store/selectors'
@@ -70,6 +71,18 @@ const App = ({chartIDs, mode, columns, onOpenFile}) => (
           ))}
           {chartIDs.map(id => (
             <FFTChart key={id} id={id} />
+          ))}
+        </Grid>
+      </Fragment>
+    )}
+    {chartIDs.length !== 0 && mode === 'histogram' && (
+      <Fragment>
+        <Grid columns={columns}>
+          {chartIDs.map(id => (
+            <DataChart key={id} id={id} />
+          ))}
+          {chartIDs.map(id => (
+            <HistogramChart key={id} id={id} />
           ))}
         </Grid>
       </Fragment>

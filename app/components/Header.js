@@ -56,6 +56,11 @@ const Header = ({onOpenFile, onSave, onCloseFile, onUpdateSettings, onExit}) => 
                   text="Full Length FFT"
                   onClick={() => onUpdateSettings('mode', 'full-fft')}
                 />
+                <MenuItem
+                  iconName="full-stacked-chart"
+                  text="Histogram"
+                  onClick={() => onUpdateSettings('mode', 'histogram')}
+                />
               </MenuItem>
               <MenuItem text="Layout">
                 <MenuItem
