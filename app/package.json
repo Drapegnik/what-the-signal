@@ -24,7 +24,7 @@
     "highcharts-boost": "^0.1.2",
     "jdataview": "^2.5.0",
     "lodash": "^4.17.15",
-    "mathjs": "^3.17.0",
+    "mathjs": "^7.5.1",
     "react": "^16.1.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.1.1",
